@@ -1,0 +1,4 @@
+project_id = "jssiaccxvyboajmaivhb"
+
+[functions.generate-questions-from-pdf]
+verify_jwt = true

@@ -3,16 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { GraduationCap, CheckCircle, FileEdit, Plus, LogOut, Sparkles, BarChart3, Upload } from "lucide-react";
+import { GraduationCap, CheckCircle, FileEdit, Plus, LogOut, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
 
 const TeacherDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const menuOptions = [
     {
@@ -117,14 +113,6 @@ const TeacherDashboard = () => {
               </PopoverContent>
             </Popover>
             <Button
-              onClick={() => navigate("/teacher/analytics")}
-              variant="outline"
-              className="flex items-center gap-2 hover:border-primary hover:text-primary transition-all hover:scale-105"
-            >
-              <BarChart3 className="h-4 w-4" />
-              Dashboard
-            </Button>
-            <Button
               onClick={logout}
               variant="outline"
               className="flex items-center gap-2 hover:border-destructive hover:text-destructive transition-all hover:scale-105"
@@ -148,37 +136,6 @@ const TeacherDashboard = () => {
           </div>
         </Card>
 
-        {/* File Upload Section */}
-        <Card className="p-8 mb-8 border border-border/50 shadow-card animate-fade-in">
-          <div className="flex items-start gap-4">
-            <div className="inline-flex p-4 rounded-2xl bg-gradient-accent shadow-card">
-              <Upload className="h-8 w-8 text-white" />
-            </div>
-            <div className="flex-1 space-y-4">
-              <div>
-                <h3 className="text-xl font-display font-bold text-foreground mb-2">
-                  Adicionar arquivo
-                </h3>
-                <p className="text-muted-foreground font-medium">
-                  Envie documentos para gerar questões automaticamente
-                </p>
-              </div>
-              <div className="relative">
-                <Input
-                  id="file-upload"
-                  type="file"
-                  className="w-full cursor-pointer file:cursor-pointer file:mr-2 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 text-sm text-muted-foreground overflow-hidden text-ellipsis whitespace-nowrap"
-                  onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
-                />
-                {selectedFile && (
-                  <p className="text-sm text-muted-foreground font-medium mt-2 truncate">
-                    Arquivo selecionado: {selectedFile.name}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-        </Card>
 
         {/* Menu Options */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
