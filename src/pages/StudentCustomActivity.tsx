@@ -18,6 +18,7 @@ const StudentCustomActivity = ({ onBack }: { onBack: () => void }) => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [mode, setMode] = useState<"manual" | "pdf">("manual");
+  const [numQuestions, setNumQuestions] = useState<string>("5");
 
   const addTask = () => {
     setTasks([...tasks, ""]);
@@ -48,7 +49,7 @@ const StudentCustomActivity = ({ onBack }: { onBack: () => void }) => {
       const formData = new FormData();
       formData.append('pdf', pdfFile);
       formData.append('subject', subject);
-      formData.append('numQuestions', '5');
+      formData.append('numQuestions', numQuestions);
 
       const { data, error } = await supabase.functions.invoke('generate-questions-from-pdf', {
         body: formData,
@@ -187,6 +188,20 @@ const StudentCustomActivity = ({ onBack }: { onBack: () => void }) => {
                   )}
                 </div>
 
+                <div className="space-y-2">
+                  <Label htmlFor="num-questions">Quantidade de Questões</Label>
+                  <Select value={numQuestions} onValueChange={setNumQuestions}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="5">5 questões</SelectItem>
+                      <SelectItem value="10">10 questões</SelectItem>
+                      <SelectItem value="15">15 questões</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
                 <Button
                   type="button"
                   onClick={handleGenerateFromPdf}
@@ -196,10 +211,10 @@ const StudentCustomActivity = ({ onBack }: { onBack: () => void }) => {
                   {isGenerating ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Gerando Questões...
+                      Gerando {numQuestions} Questões...
                     </>
                   ) : (
-                    "Gerar Questões com IA"
+                    `Gerar ${numQuestions} Questões com IA`
                   )}
                 </Button>
               </div>

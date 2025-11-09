@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { BookOpen, ClipboardList, Send, LogOut, Sparkles, Plus, FileText, User } from "lucide-react";
+import { BookOpen, Send, LogOut, Sparkles, Plus, FileText } from "lucide-react";
 import { PDFFlashcardGenerator } from "@/components/PDFFlashcardGenerator";
 import StudentCustomActivity from "@/pages/StudentCustomActivity";
-import StudentPendingActivities from "@/pages/StudentPendingActivities";
 import StudentSubmitAssessment from "@/pages/StudentSubmitAssessment";
 
 const StudentDashboard = () => {
@@ -28,13 +27,6 @@ const StudentDashboard = () => {
       description: "Organize seus estudos criando suas próprias atividades",
       icon: Plus,
       gradient: "bg-gradient-accent",
-    },
-    {
-      id: "pending-activities",
-      title: "Atividades Pendentes",
-      description: "Veja todas as suas tarefas e trabalhos pendentes",
-      icon: ClipboardList,
-      gradient: "bg-gradient-secondary",
     },
     {
       id: "submit-assessment",
@@ -74,10 +66,6 @@ const StudentDashboard = () => {
 
   if (selectedOption === "custom-activity") {
     return <StudentCustomActivity onBack={() => setSelectedOption(null)} />;
-  }
-
-  if (selectedOption === "pending-activities") {
-    return <StudentPendingActivities onBack={() => setSelectedOption(null)} />;
   }
 
   if (selectedOption === "submit-assessment") {
